@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/style/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <title>Past Events</title>
+</head>
+<body>
+    <header>
+        <!-----------------------------------------------------NAVBAR----------------------------------------------------------------------->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Ninth navbar example">
+            <div class="container-xl">
+            <img src="/assets/LogoAmazingEvents.png" alt="logo" width="100"><a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07XL" aria-controls="navbarsExample07XL" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarsExample07XL">
+                
+                <ul class="navbar-nav gap-5 p-1">
+                <li class="nav-item col-10">
+                    <a class="nav-link" href="/index.html" style="color:white">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link p-1" href="/pages/upcomingevent.html" style="color:white">Upcoming Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color:white">Past Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/contact.html" style="color:white">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pages/stats.html" style="color:white">Stats</a>
+                </li>
+                </ul>
+            
+            </div>
+            </div>
+        </nav>
+
+        <!-------------------------------------------------CARROUSEL-------------------------------------------------------------->
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/assets/psteven.png" class="d-block w-100" alt="slide">
+            </div>
+            <div class="carousel-item">
+                <img src="/assets/psteven.png" class="d-block w-100" alt="slide" >
+            </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </header>
+
+        <main>
+        <!-------------------------------------------CHECKBOX-------------------------------------------------------------------->
+        <form action="get" class="container d-flex justify-content-center gap-3 align-items-center flex-wrap mt-3">
+            <input type="checkbox" id="check">
+            <label for="check">Category</label>
+            <input type="checkbox" id="check1">
+            <label for="check1">Category</label>
+            <input type="checkbox" id="check2">
+            <label for="check2">Category</label>
+            <input type="checkbox" id="check3">
+            <label for="check3">Category</label>
+            <input type="checkbox" id="check4">
+            <label for="check4">Category</label>
+            <input type="checkbox" id="check5">
+            <label for="check5">Category</label>
+            <input type="text" placeholder="Search" class="w-25">
+            <button class="btn btn-dark"><i class="bi bi-search" style="color:white;"></i></button>
+        </form>
+        
+
+        <!---------------------------------------CARDS-------------------------------------------------------------------------------->
+        <div  class="row row-cols-1 row-cols-md-3 g-4 gap-5 justify-content-center m-2">
+            <div class="card" style="width: 18rem;">
+                <img src="/assets/Museum_Tour.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title" style="color:white;">Museum Tour</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-light">$2000</button>
+                    <a href="/pages/details.html" class="card-button">See more</a>
+                </div>
+            </div>
+            </div>
+            
+            <div class="card" style="width: 18rem;">
+                <img src="/assets/Costume_Party.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title" style="color:white;">Costume Party</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-light">$1500</button>
+                    <a href="/pages/details.html" class="card-button">See more</a>
+                </div>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 18rem;">
+                <img src="/assets/Food_Fair.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title" style="color:white;">Catering</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-light">$1800</button>
+                    <a href="/pages/details.html" class="card-button">See more</a>
+                </div>
+                    </div>
+                </div>
+            
+            <div class="card" style="width: 18rem;">
+                <img src="/assets/Marathon.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title" style="color:white;">Marathon</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-light">$3000</button>
+                    <a href="/pages/details.html" class="card-button">See more</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-----------------------------------------FOOTER----------------------------------------------------------------------------------->
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center flex-row-reverse py-3 my-4 border-top">
+        <div>
+            <p class="mb-3 mb-md-0 text-footer">FE06-TN</p>
+        </div>
+    
+        <ul class="nav col-md-4  list-unstyled d-flex gap-4">
+            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-facebook" style="font-size: 2rem; color: rgb(255, 255, 255);"></i></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-instagram" style="font-size: 2rem; color: rgb(255, 255, 255);"></i></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><i class="bi bi-whatsapp" style="font-size: 2rem; color: rgb(255, 255, 255);"></i></a></li>
+        </ul>
+        </footer>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
