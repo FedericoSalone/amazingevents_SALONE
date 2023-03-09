@@ -1,71 +1,110 @@
-let container = document.getElementById("card")
+//data
+import data from './datoscards.js';
 
-let eventosPresentes = [
-    {
-        _id: 1,
-        "image": "https://i.postimg.cc/Fs03hQDt/Collectivities-Party.jpg",
-        "name": "Collectivities Party",
-        "date": "2021-12-12",
-        "description": "Enjoy your favourite dishes, from different countries, in a unique event for the whole family.",
-        "category": "Food Fair",
-        "place": "Room A",
-        "capacity": 45000,
-        "assistance": 42756,
-        "price": 5
-    },
-    {
-        _id: 5,
-        "image": "https://i.postimg.cc/KYD0jMf2/comicon.jpg",
-        "name": "Comicon",
-        "date": "2021-02-12",
-        "description": "For comic lovers, all your favourite characters gathered in one place.",
-        "category": "Costume Party",
-        "place": "Room C",
-        "capacity": 120000,
-        "assistance": 110000,
-        "price": 54
-    },
-    {
-        _id: 12,
-        "image": "https://i.postimg.cc/05FhxHVK/book4.jpg",
-        "name": "Just for your kitchen",
-        "date": "2021-11-09",
-        "description": "If you're a gastronomy lover come get the cookbook that best suits your taste and your family's.",
-        "category": "Book Exchange",
-        "place": "Room D6",
-        "capacity": 130000,
-        "assistance": 90000,
-        "price": 100
-    },
-    {
-        _id: 13,
-        "image": "https://i.postimg.cc/vH52y81C/cinema4.jpg",
-        "name": "Batman",
-        "date": "2021-3-11",
-        "description": "Come see Batman fight crime in Gotham City.",
-        "category": "Cinema",
-        "place": "Room D1",
-        "capacity": 11000,
-        "assistance": 9300,
-        "price": 225
-    },
-]
 
+//eventos
+let $container = document.getElementById('card')
+let $checkbox = document.getElementById("checkbox")
+let $search = document.getElementById("search");
+//cards
 const fragment = document.createDocumentFragment();
-
-function verCards(array, contenedor) {
-    for (let carta of array) {
+const eventsCards = (array, container) => {
+    container.innerHTML = ""
+    array.forEach(cards => {
         let div = document.createElement('div');
-        div.className = "card"
-        div.innerHTML += `
-        <img class="card-img-top" src="${carta.image}"/>
-        <div class="card-body">
-            <h3 style="color:#ffffff">${carta.name}</h3>
-            <p>${carta.category}</p>
-            <button class="card-button"><a href="/pages/details.html">SEE MORE</a></button>
-            </div>   `
-        fragment.appendChild(div)
-    }
-    contenedor.appendChild(fragment)
+        div.className = 'card card-index'
+        div.style = 'width: 18rem; height: 25rem';
+        div.innerHTML = `
+            <img class="card-img-top" src="${cards.image}"/>
+            <div class="card-body">
+            <h4 style="color:#ffffff">${cards.name.toLowerCase()}</h4>
+            <p>${cards.category}</p>
+            <button class="card-button"><a href="/pages/details.html?id=${cards._id}">SEE MORE</a></button>
+            </div>   
+        
+        `
+        fragment.appendChild(div);
+
+    })
+    if(array.length == 0){
+        container.innerHTML = `
+        <h4 style= "color:#ffffff"> No se encontraron resultados </h4>
+        `
 }
-verCards(eventosPresentes, container)
+container.appendChild(fragment);
+}
+eventsCards(data.events, $container);
+
+
+
+
+
+//categorias
+const createCategories = (array) => {
+    let categories = array.map(e => e.category)
+
+    categories = categories.reduce((acumulet, elemento) => {
+        if (!acumulet.includes(elemento)) {
+            acumulet.push(elemento);
+        }
+        return acumulet
+    }, [])
+    return categories
+}
+
+let categories = createCategories(data.events)
+
+//Checbox dinamicos
+const createCheckbox = (array, container) => {
+    array.forEach(category => {
+        let div = document.createElement('div')
+        div.className = `checkbox-container ${category.toLowerCase()}`
+        div.innerHTML = `
+        <input type="checkbox" id="${category.toLowerCase()}" name="category"/>
+        <label for="${category.toLowerCase()}">${category}</label>
+        
+        `
+        container.appendChild(div)
+    })
+}
+createCheckbox(categories, $checkbox)
+
+//filtros 
+
+const filterSearch = (array, value) => {
+    let filteredArray = array.filter(element => element.name.toLowerCase().includes(value.toLowerCase()))
+    return filteredArray
+}
+
+const filterCheckbox = (array) => {
+    let checked = document.querySelectorAll('input[type="checkbox"]:checked');
+    let filteredArray = array
+    if (checked.length > 0) {
+        filteredArray = [];
+        for(let i=0; i<checked.length; i++){
+
+            filteredArray = filteredArray.concat(array.filter(element => element.category.toLowerCase().includes(checked[i].id.toLowerCase())))
+        }
+    }
+    return filteredArray
+}
+
+
+const filterAndPrint = (array) => {
+
+    let arrayFiltered = filterSearch(array, $search.value)
+    arrayFiltered = filterCheckbox(arrayFiltered)
+    return arrayFiltered
+}
+
+$search.addEventListener('keyup', () => {
+    let dataFilter = filterAndPrint(data.events)
+
+    eventsCards(dataFilter, $container)
+})
+
+$checkbox.addEventListener("change", () => {
+    let dataFilter = filterAndPrint(data.events)
+
+    eventsCards(dataFilter, $container)
+})

@@ -37,23 +37,30 @@ body {
     -moz-box-shadow: -9px -1px 7px 0px rgba(0, 0, 0, 0.96);
 }
 
-.card-img-top {
+.card-img-top{
     width: 100%;
-    height: 100%;
+    height: 50%;
+    border: solid 4px #ffffff;
+    border-radius: 10px;
 }
-
+.card-index:hover{
+    scale: 1.10;
+    transition: 1s;
+}
 
 .card-body {
     text-align: center;
     justify-content: center;
     background-color: #5c5656;
     border-radius: 10px;
+    border: solid 4px #ffffff;
 }
+
+
 
 p {
     color: #ffffff;
 }
-
 
 .carousel-item {
     align-items: center;
@@ -74,7 +81,7 @@ table {
     border-radius: 5px;
 }
 
-h3 {
+h3,h4 {
     background-color: #820000;
     border: solid 3px #ffffff;
     border-radius: 10px;
@@ -82,19 +89,19 @@ h3 {
 }
 
 
-.img-details {
-    border: solid 2px #000000;
-    box-shadow: -15px -8px 5px 0px rgb(78, 78, 78);
-    -webkit-box-shadow: -15px -8px 5px 0px rgb(78, 78, 78);
-    -moz-box-shadow: -15px -8px 5px 0px rgb(78, 78, 78);
-
+.card-details{
+    width: 100%;
+    min-height: 100%;
+    border-radius: 10px;
 }
 
-.div-details {
-    background-color: #820000;
-    border-radius: 30px;
-}
 
-.card-title-details {
-    text-align: center;
+header{
+    min-height: 15vh;
+}
+main{
+    min-height: 75vh;
+}
+footer{
+    height: 10vh;
 }

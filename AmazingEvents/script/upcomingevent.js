@@ -1,71 +1,110 @@
-let container = document.getElementById("card")
+//data
+import data from './datoscards.js';
 
-let eventosPresentes = [
-    {
-        _id: 2,
-        "image": "https://i.postimg.cc/ZmD3Xf57/Korean-style.jpg",
-        "name": "Korean style",
-        "date": "2022-08-12",
-        "description": "Enjoy the best Korean dishes, with international chefs and awesome events.",
-        "category": "Food Fair",
-        "place": "Room A",
-        "capacity": 45000,
-        "assistance": 42756,
-        "price": 10
-    },
-    {
-        _id: 6,
-        "image": "https://i.postimg.cc/RZ9fH4Pr/halloween.jpg",
-        "name": "Halloween Night",
-        "date": "2022-02-12",
-        "description": "Come with your scariest costume and win incredible prizes.",
-        "category": "Costume Party",
-        "place": "Room C",
-        "capacity": 12000,
-        "estimate": 9000,
-        "price": 12
-    },
-    {
-        _id: 10,
-        "image": "https://i.postimg.cc/zv67r65z/15kny.jpg",
-        "name": "15K NY",
-        "date": "2022-03-01",
-        "description": "We'll be raising funds for hospitals and medical care in this unique event held in The Big Apple.",
-        "category": "Race",
-        "place": "New York",
-        "capacity": 3000000,
-        "assistance": 2569800,
-        "price": 3
-    },
-    {
-        _id: 14,
-        "image": "https://i.postimg.cc/T3C92KTN/scale.jpg",
-        "name": "Avengers",
-        "date": "2022-10-15",
-        "description": "Marvel's Avengers Premier in 3d, the start of an epic saga with your favourite superheroes.",
-        "category": "Cinema",
-        "place": "Room D1",
-        "capacity": 9000,
-        "estimate": 9000,
-        "price": 250
-    },
-]
 
+//eventos
+let $container = document.getElementById('card')
+let $checkbox = document.getElementById("checkbox")
+let $search = document.getElementById("search");
+//cards
 const fragment = document.createDocumentFragment();
-
-function verCards(array, contenedor) {
-    for (let carta of array) {
+const eventsCards = (array, container) => {
+    container.innerHTML = ""
+    array.forEach(cards => {
         let div = document.createElement('div');
-        div.className = "card"
-        div.innerHTML += `
-        <img class="card-img-top" src="${carta.image}"/>
-        <div class="card-body">
-            <h3 style="color:#ffffff">${carta.name}</h3>
-            <p>${carta.category}</p>
-            <button class="card-button"><a href="/pages/details.html">SEE MORE</a></button>
-            </div>   `
-        fragment.appendChild(div)
-    }
-    contenedor.appendChild(fragment)
+        div.className = 'card card-index'
+        div.style = 'width: 18rem; height: 25rem';
+        div.innerHTML = `
+            <img class="card-img-top" src="${cards.image}"/>
+            <div class="card-body">
+            <h4 style="color:#ffffff">${cards.name.toLowerCase()}</h4>
+            <p>${cards.category}</p>
+            <button class="card-button"><a href="/pages/details.html?id=${cards._id}">SEE MORE</a></button>
+            </div>   
+        
+        `
+        fragment.appendChild(div);
+
+    })
+    if(array.length == 0){
+        container.innerHTML = `
+        <h4 style= "color:#ffffff"> No se encontraron resultados </h4>
+        `
 }
-verCards(eventosPresentes, container)
+container.appendChild(fragment);
+}
+eventsCards(data.events, $container);
+
+
+
+
+
+//categorias
+const createCategories = (array) => {
+    let categories = array.map(e => e.category)
+
+    categories = categories.reduce((acumulet, elemento) => {
+        if (!acumulet.includes(elemento)) {
+            acumulet.push(elemento);
+        }
+        return acumulet
+    }, [])
+    return categories
+}
+
+let categories = createCategories(data.events)
+
+//Checbox dinamicos
+const createCheckbox = (array, container) => {
+    array.forEach(category => {
+        let div = document.createElement('div')
+        div.className = `checkbox-container ${category.toLowerCase()}`
+        div.innerHTML = `
+        <input type="checkbox" id="${category.toLowerCase()}" name="category"/>
+        <label for="${category.toLowerCase()}">${category}</label>
+        
+        `
+        container.appendChild(div)
+    })
+}
+createCheckbox(categories, $checkbox)
+
+//filtros 
+
+const filterSearch = (array, value) => {
+    let filteredArray = array.filter(element => element.name.toLowerCase().includes(value.toLowerCase()))
+    return filteredArray
+}
+
+const filterCheckbox = (array) => {
+    let checked = document.querySelectorAll('input[type="checkbox"]:checked');
+    let filteredArray = array
+    if (checked.length > 0) {
+        filteredArray = [];
+        for(let i=0; i<checked.length; i++){
+
+            filteredArray = filteredArray.concat(array.filter(element => element.category.toLowerCase().includes(checked[i].id.toLowerCase())))
+        }
+    }
+    return filteredArray
+}
+
+
+const filterAndPrint = (array) => {
+
+    let arrayFiltered = filterSearch(array, $search.value)
+    arrayFiltered = filterCheckbox(arrayFiltered)
+    return arrayFiltered
+}
+
+$search.addEventListener('keyup', () => {
+    let dataFilter = filterAndPrint(data.events)
+
+    eventsCards(dataFilter, $container)
+})
+
+$checkbox.addEventListener("change", () => {
+    let dataFilter = filterAndPrint(data.events)
+
+    eventsCards(dataFilter, $container)
+})
