@@ -39,3 +39,5 @@ const filterAndPrint = (array) => {
     return arrayFiltered
 }
 
+
+
